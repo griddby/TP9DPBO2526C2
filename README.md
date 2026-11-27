@@ -183,3 +183,5 @@ Dengan demikian, pengguna dapat memilih nama kandidat secara langsung tanpa haru
 # 3. Dokumentasi Program
 
 Dokumentasi proses Create, Read, Update, dan Delete pada aplikasi Recruitment System.
+
+https://github.com/user-attachments/assets/be6c6273-ac6c-4663-ad2e-564d6deeccfc
