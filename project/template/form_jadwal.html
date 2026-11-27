@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Jadwal Interview</title>
+
+    <style>
+        :root {
+            --bg: #f7f8fb;
+            --card: #ffffff;
+            --muted: #6b7280;
+            --accent: #2563eb;
+            --border: #e6e9ef;
+            --radius: 8px;
+            font-family: system-ui, -apple-system, "Segoe UI", Arial;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: #0f172a;
+        }
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 36px auto;
+            padding: 18px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(16,24,40,0.04);
+        }
+
+        h1 {
+            margin: 0 0 24px;
+            font-size: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 14px;
+            background: #ffffff;
+            color: #0f172a;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-save {
+            background: var(--accent);
+            color: #ffffff;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .nav-menu {
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigasi utama aplikasi. -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand">Recruitment System</div>
+
+            <div class="nav-menu">
+                <a href="index.php?screen=list">Data Kandidat</a>
+                <a href="index.php?screen=list_jadwal" class="active">Jadwal Interview</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h1>{{FORM_TITLE}}</h1>
+
+            <form method="post" action="index.php">
+
+                <input type="hidden" name="action" value="{{ACTION}}">
+                <input type="hidden" name="id_interview" value="{{ID_INTERVIEW}}">
+
+                <div class="form-group">
+                    <label for="id">Nama Kandidat</label>
+                    <select name="id" id="id" required>
+                        {{PILIHAN_KANDIDAT}}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nama_interviewer">Nama Interviewer</label>
+                    <input
+                        type="text"
+                        name="nama_interviewer"
+                        id="nama_interviewer"
+                        value="{{NAMA_INTERVIEWER}}"
+                        placeholder="Masukkan nama interviewer"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="jenis_interview">Jenis Interview</label>
+                    <select name="jenis_interview" id="jenis_interview" required>
+                        <option value="">-- Pilih Jenis Interview --</option>
+                        <option value="HR Interview" {{HR_SELECTED}}>HR Interview</option>
+                        <option value="User Interview" {{USER_SELECTED}}>User Interview</option>
+                        <option value="Technical Interview" {{TECHNICAL_SELECTED}}>Technical Interview</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tanggal">Tanggal dan Waktu Interview</label>
+                    <input
+                        type="datetime-local"
+                        name="tanggal"
+                        id="tanggal"
+                        value="{{TANGGAL}}"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="status_interview">Status Interview</label>
+                    <select name="status_interview" id="status_interview" required>
+                        <option value="">-- Pilih Status --</option>
+                        <option value="Dijadwalkan" {{DIJADWALKAN_SELECTED}}>Dijadwalkan</option>
+                        <option value="Selesai" {{SELESAI_SELECTED}}>Selesai</option>
+                        <option value="Dibatalkan" {{DIBATALKAN_SELECTED}}>Dibatalkan</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <a href="index.php?screen=list_jadwal" class="btn btn-cancel">Batal</a>
+                    <button type="submit" class="btn btn-save">Simpan Jadwal</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
